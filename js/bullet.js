@@ -2,7 +2,7 @@ class Bullet {
     constructor(gameArea, x, y) {
         this.gameArea = gameArea;
         this.x = x; // ซ้าย
-        this.y = y; // จากบน
+        this.y = y; // 
         this.element = document.createElement('div'); //สร่างเอเลียนมาใหม่
         this.element.className = 'bullet'; //อันนี้เอาใปใช้ตกแต่งในcss
         this.gameArea.appendChild(this.element);
@@ -23,9 +23,16 @@ class Bullet {
     }
 
 
-    //when boulet hit alien position //need to be uddate 
+    //when bullet hit alien position //need to be uddate 
     collidesWith(alien) {
-        return this.x < alien.x + 70 && this.x + 10 > alien.x &&
-               this.y < alien.y + 30 && this.y + 20 > alien.y;
+        return this.x < alien.x + 10 && this.x + 5 > alien.x && // ซ้ายหรอ เริ่มจาก0
+               this.y < alien.y + 1000 && this.y + 600 > alien.y; // ขวาหรอ เริ่มจาก0
     }
+
+    //collidesWith(alien) {
+    //    return this.x < alien.x + alien.width &&
+    //           this.x + this.width > alien.x &&
+    //           this.y < alien.y + alien.height &&
+    //           this.y + this.height > alien.y;
+    //}
 }

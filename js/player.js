@@ -15,18 +15,28 @@ class Player {
         this.element.style.top = `${this.y}px`;
     }
     //moves the player left or right based keybord set up medt.
-    move(direction) {
-        const maxPlayerX = this.gameArea.offsetWidth - this.width;
-        if (direction === 'right' && this.x < maxPlayerX) {
-            this.x += 7;
-        } else if (direction === 'left' && this.x > 0) {
-            this.x -= 7;
-        }
-        this.updatePosition();
-    }
+    //move(direction) {
+    //    const maxPlayerX = this.gameArea.offsetWidth - this.width;
+    //    if (direction === 'right' && this.x < maxPlayerX) {
+    //        this.x += 7;
+    //    } else if (direction === 'left' && this.x > 0) {
+    //        this.x -= 7;
+    //    }
+    //    this.updatePosition();
+    //    
+    //}
 
     setImage(imageUrl) {
         this.element.style.backgroundImage = `url(${imageUrl})`;
         this.element.style.backgroundSize = 'cover';
+    }
+    move(direction) {
+        const step = 10; // Adjust the step size as needed
+        if (direction === 'left') {
+            this.x = Math.max(0, this.x - step);
+        } else if (direction === 'right') {
+            this.x = Math.min(this.gameArea.offsetWidth - this.width, this.x + step);
+        }
+        this.updatePosition();
     }
 }

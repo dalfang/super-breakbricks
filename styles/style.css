@@ -92,19 +92,19 @@ button:hover {
 }
 
 .alien {
-    width: 10vh;
-    height: 12vh;
-    background: green;
+    width: 20px;
+    height: 22px;
+    background: rgb(18, 29, 18);
 }
 
 #player {
-    width: 25vh; /* on la fix ici pour la taille  */
-    height: 25vh; /* on la fix ici*/
+    width: 24vh; /* on la fix ici pour la taille  */
+    height: 24vh; /* on la fix ici*/
     background-image: url('../img/spider-man.png');
     background-size: cover;
     background-position: center;
     bottom: 50vh;
-    margin-top: 18vh /*ความห่างจากพื้นด้านล่าง
+    margin-top: 25vh /*ความห่างจากพื้นด้านล่าง
     /*position: absolute; /* Ensure it's positioned absolutely */
 }
 
@@ -119,8 +119,8 @@ button:hover {
 
 .bullet {
     position: absolute;
-    width: 5px;
-    height: 23px;
+    width: 7px;
+    height: 30px;
     background: yellow;
     bottom: 70vh;/*ความห่างจากพื้นด้านล่าง*/
     transition: transform 0.1s linear;
