@@ -29,10 +29,4 @@ class Bullet {
                this.y < alien.y + 1000 && this.y + 600 > alien.y; // ขวาหรอ เริ่มจาก0
     }
 
-    //collidesWith(alien) {
-    //    return this.x < alien.x + alien.width &&
-    //           this.x + this.width > alien.x &&
-    //           this.y < alien.y + alien.height &&
-    //           this.y + this.height > alien.y;
-    //}
 }

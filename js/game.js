@@ -4,7 +4,7 @@ class Game {
         this.height = 1880
         this.width = 1614;
         this.score = 0;
-        this.lives = 0;
+        this.lives = 3000;
         this.speed = 1;
         this.aliens = []//[new Alien(this.gameArea, this.speed)]; //array to hold alien objects.
         this.bullets = [];//array to hold bullet objects.
@@ -28,7 +28,7 @@ class Game {
           //creates 10 aliens and positions them in a row //need to be update
     populateAliens() {
         const alienCount = 10;
-        const alienWidth = 40;
+        const alienWidth = 70;
         const gameAreaWidth = this.gameArea.offsetWidth;
         //const gap = (gameAreaWidth - alienCount * alienWidth) / (alienCount + 1); //tryna calcul. the gap btwn alien here
         // Calculate starting x-coordinate so aliens are centered in the game area
@@ -43,55 +43,27 @@ class Game {
         //}
     }
 
-    setupEventListeners() {
-        // Move player based on mouse movement
-        window.addEventListener('mousemove', event => {
-            const canvasRect = this.gameArea.getBoundingClientRect();
-            const mouseX = event.clientX - canvasRect.left;
-    
-            // Assuming player is centered on the mouse x position
-            this.player.x = mouseX - this.player.width / 2;
-            this.player.updatePosition();
-        });
-    
-        // Fire bullets on mouse click
-        window.addEventListener('click', event => {
-            this.bullets.push(new Bullet(
-                this.gameArea,
-                this.player.x + this.player.width / 2 - 2.5,
-                this.player.y - 50
-            ));
-        });
-    }
-    
+setupEventListeners() {
+    // Move player based on mouse movement
+    window.addEventListener('mousemove', event => {
+        const gameAreaRect = this.gameArea.getBoundingClientRect();
+        const mouseX = event.clientX - gameAreaRect.left;
+        const halfPlayerWidth = this.player.width / 2;
 
-    //setupEventListeners() {
-    //    window.addEventListener('keydown', event => {
-    //        if (event.keyCode === 37) { // left arrow
-    //            this.player.move('left');
-    //        } else if (event.keyCode === 39) { // right arrow
-    //            this.player.move('right');
-    //        }    
-    //    });
-    //    window.addEventListener('click', event => {
-    //        this.bullets.push(new Bullet(this.gameArea, this.player.x + this.player.width / 2 - 2.5, this.player.y - 50));
-    //    });
-    //}
+        // Keep the player within the game area boundaries
+        this.player.x = Math.min(Math.max(mouseX - halfPlayerWidth, 0), gameAreaRect.width - this.player.width);
+        this.player.updatePosition();
+    });
 
-    //setupEventListeners() {
-    //    window.addEventListener('keydown', event => {
-    //        if (event.keyCode === 37) { // left arrow
-    //            this.player.move('left');
-    //        } else if (event.keyCode === 39) { // right arrow
-    //            this.player.move('right');
-    //        } else if (event.keyCode === 32) { // space bar
-    //            this.bullets.push(new Bullet(this.gameArea, this.player.x + this.player.width / 2 - 2.5, this.player.y - 50));
-    //                                                                                          // ^ position of bullet here
-    //        }
-    //    });
-    //}
+    // Fire bullets on mouse click
+    window.addEventListener('click', event => {
+        const bulletX = this.player.x + this.player.width / 2 - 2.5;
+        const bulletY = this.player.y - 50;
+        this.bullets.push(new Bullet(this.gameArea, bulletX, bulletY));
+    });
+}
+        update() {
 
-    update() {
         this.aliens.forEach((alien, index) => {
             alien.move();
             this.lives = 3;
@@ -106,23 +78,6 @@ class Game {
             }
         });
 
-        //if(gameShouldEnd){
-        //    this.endGame();
-        //    return;
-
-        // adding condition where i want the player loose live when there is a colision with bullet
-        //this.aliens.forEach(alien => {
-        //    alien.move();
-        //    if (this.checkCollision(this.player, alien)) {
-        //        this.lives -= 1;
-        //        this.updateDisplay();
-        //        //this.aliens.splice(index, 1); //remove the alien
-        //        if (this.lives <= 0) {
-        //            this.endGame("Game Over");
-        //            return;
-        //        }
-        //    }       
-        //});
         this.bullets.forEach((bullet, index) => {
             bullet.move();
             if (bullet.y < 0) {
@@ -148,15 +103,12 @@ class Game {
             console.log("Win??");
             this.endGame();
         }
-        ///try to put ramdon alien here
-        //if (Math.random()>0.98 && this.aliens.length < 1){
-        //    this.aliens.push(new Alien(this.gameArea, this.speed));
-        //}
     }
     updateDisplay(){
         document.getElementById('score').textContent = 'Score: ' + this.score;
         document.getElementById('lives').textContent = 'Lives: ' + this.lives;
     }
+
 
     ///try to make the colistion here
     checkCollision(player, alien) {
