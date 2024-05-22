@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Super shooter!</title>
+    <link rel="stylesheet" href="./styles/style.css">
+</head>
+<body>
+    <main>
+        <!-- Game Introduction Screen -->
+        <div id="game-intro">
+            <img src="./img/logo.png" alt="Game Logo" class="logo-img"/>
+            <button id="start-game-button" class="start-game-button"></button>
+            <button id="sign-game-button" class="sign-game-button">SIGN IN</button>
+            <div id="sign-in-form">
+                <!-- Need to change-->
+                <input type="text" id="username" placeholder="Enter your name" style="display:none;">
+                <button onclick="saveName()">Submit</button>
+            </div>
+        </div>
+
+        <!-- Game Play Area -->
+        <div id="gameArea" style="display:none;">
+            <div id="score">Score: </div>
+            <div id="lives">Lives: </div>
+            <div id="player"></div>
+            <div id="aliens"></div>
+        </div>
+        
+        <!-- Game Over Screen -->
+        <div id="game-end" style="display:none;">
+            <div>
+                <h1>Game Over!</h1>
+            </div>
+            <button id="restart-button" class="restart-button">RESTART</button>
+        </div>
+    </main>
+    <script src="js/script.js"></script>
+    <script src="js/alien.js"></script>
+    <script src="js/game.js"></script>
+    <script src="js/player.js"></script>
+    <script src="js/bullet.js"></script>
+</body>
+</html>

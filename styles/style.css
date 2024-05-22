@@ -1,0 +1,148 @@
+body {
+    padding: 0;
+    margin: 0; /* Added to reset the default margin of the body */
+    text-align: center;
+}
+
+/*Game intro screen*/
+
+#game-intro {
+    width: 100%;
+    height: 100vh; /*change size bg here*/
+    background-image: url(../img/intro-background.png);
+    background-size: cover;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#game-intro img.logo-img {
+    max-height: 300px;
+    width: 40vw; /* Keeps the aspect ratio intact */
+    margin: -40px auto 30px; /* Shorthand for margin settings, pushing the image up */
+}
+
+button {
+    border: none;
+    color: transparent; /* Set the text color */
+    background-size: cover; /* Cover ensures the image covers the entire button */
+    background-position: center; /* Center the background image */
+    background-color: transparent;
+    cursor: pointer;
+    outline: none;
+}
+
+.start-game-button {
+    width: 80vw; /* Responsive width */
+    height: 28vh; /* Responsive height */
+    background-image: url('../img/start-button.png');
+    margin-top: -10vh; /* Space between logo and this button */
+    margin-left: 4vh;
+}
+
+.sign-game-button {
+    display: none;
+    width: 14vw; /* Responsive width */
+    height: 7vh; /* Responsive height */
+    background-image: url('../img/sign-button.png');
+    margin-top: 3vh; /* Space between start and sign in buttons */
+    margin-left: -1vh;
+}
+
+button:hover {
+    filter: brightness(85%);
+    
+}
+
+#sign-in-form {
+    margin-top: 20px;
+}
+
+#username {
+    padding: 10px;
+    margin-right: 5px;
+}
+
+/*Game screen*/
+
+#gameArea {
+    display: none;
+    width: 100%;
+    height: 100vh; /*change size bg here*/
+    background-image: url(../img/background.png);
+    background-size: cover;
+    position: relative;
+    animation: slide 9s linear infinite;
+    overflow: hidden;
+}
+
+@keyframes slide {
+    0% {
+        background-position: 0 0; /* Start from the right */
+    }
+    100% {
+        background-position: 100% 0; /* End at the left */
+    }
+}
+
+.alien, .player {
+    position: absolute;
+    transition: transform 0.1s linear;
+}
+
+.alien {
+    width: 10vh;
+    height: 12vh;
+    background: green;
+}
+
+#player {
+    width: 25vh; /* on la fix ici pour la taille  */
+    height: 25vh; /* on la fix ici*/
+    background-image: url('../img/spider-man.png');
+    background-size: cover;
+    background-position: center;
+    bottom: 50vh;
+    margin-top: 18vh /*ความห่างจากพื้นด้านล่าง
+    /*position: absolute; /* Ensure it's positioned absolutely */
+}
+
+.player {
+    width: 100px;
+    height: 100px;
+    background: blue;
+    bottom: 50vh;
+    margin-top: 50vh
+    
+}
+
+.bullet {
+    position: absolute;
+    width: 5px;
+    height: 23px;
+    background: yellow;
+    bottom: 70vh;/*ความห่างจากพื้นด้านล่าง*/
+    transition: transform 0.1s linear;
+}
+
+#game-end {
+    display: none;
+    width: 100%;
+    height: 100vh; /*change size bg here*/
+    background-image: url('../img/end-game-bg.png');
+    background-size: cover;
+    position: relative;
+    ;
+}
+
+.restart-button {
+    background-size: cover;
+    background-position: center;
+    border-style: double;
+    background-image: url('../img/restart-btn.png');
+    margin-top: 50vh; /* Space between logo and this button */
+
+    width: 14vw;
+    height: 7vh;
+}
