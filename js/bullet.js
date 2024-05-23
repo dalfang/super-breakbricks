@@ -1,5 +1,5 @@
 class Bullet {
-    constructor(gameArea, x, y) {
+    constructor(gameArea, x, y, speed) {
         this.gameArea = gameArea;
         this.x = x; // ซ้าย
         this.y = y; // 
@@ -7,10 +7,11 @@ class Bullet {
         this.element.className = 'bullet'; //อันนี้เอาใปใช้ตกแต่งในcss
         this.gameArea.appendChild(this.element);
         this.updatePosition();
+        this.speed = speed
     }
 
     move() {
-        this.y -= 7; // move the bullet upwards
+        this.y -= this.speed; // // speed will determine direction: negative for upward, positive for downward
         this.updatePosition();
     }
 
@@ -25,8 +26,9 @@ class Bullet {
 
     //when bullet hit alien position //need to be uddate 
     collidesWith(alien) {
-        return this.x < alien.x + 10 && this.x + 5 > alien.x && // ซ้ายหรอ เริ่มจาก0
-               this.y < alien.y + 1000 && this.y + 600 > alien.y; // ขวาหรอ เริ่มจาก0
+        console.log( "shooting");
+        return this.x < alien.x + 2 && this.x + 2 > alien.x && // ซ้ายหรอ เริ่มจาก0
+               this.y < alien.y + 10 && this.y + 6 > alien.y; // ขวาหรอ เริ่มจาก0
     }
 
 }
