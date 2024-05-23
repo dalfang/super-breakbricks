@@ -1,23 +1,32 @@
+
 class Game {
     constructor(gameArea) {
         this.gameArea = gameArea;
-        this.height = 1880
-        this.width = 1614;
+        this.height = 380
+        this.width = 214;
         this.score = 0;
-        this.lives = 100;
+        this.lives = 10;
         this.speed = 1;
-        this.bossHealth = 20;
+        this.bossHealth = 50;
         this.aliens = []//[new Alien(this.gameArea, this.speed)]; //array to hold alien objects.
         this.bullets = [];//array to hold bullet objects.
         this.player = new Player(
             this.gameArea,
-            350,
+            250,
             290); // player size x, y here
-        this.player.setImage('../img/spider-man.png'); // i set the player image
+        this.player.setImage('../img/ironman.png'); // i set the player image
         this.gameInterval = null;
         this.gameLoopFrequency = 1000 / 60;
         this.updateDisplay(); //the score and lives display
         this.setupEventListeners();
+        this.shootSound = new Audio('../sound/shoot.wav');
+        this.shootSound.volume = 0.015;
+
+        this.bossSound = new Audio('../sound/bosshuh.mp3')
+        this.bossSound.volume = 0.015;
+        this.backgroundMusic = document.getElementById('backgroundMusic');
+        this.backgroundMusic.volume = 0.05;
+        
         
         this.boss = null;
         this.alienBullets = [];
@@ -34,13 +43,14 @@ class Game {
         this.populateAliens();
         this.setupEventListeners();
         this.sequenceSpawnAliens();
-        setTimeout(() => this.spawnBossAlien(), 15000); //boss spawns 
+        setTimeout(() => this.spawnBossAlien(), 15000); //boss spawns time
+        
     }
           //creates 10 aliens and positions them in a row //need to be update
     populateAliens() {
-        const alienCount = 10;
-        const shootingAlienCount = 10;
-        const alienWidth = 70;
+        const alienCount = 3;
+        const shootingAlienCount = 8;
+        const alienWidth = 60; // ความห่างระหว่างเอเลี่ยน
         const gameAreaWidth = this.gameArea.offsetWidth;
 
         const startX = (gameAreaWidth - (alienCount + shootingAlienCount) * alienWidth) / 2;
@@ -55,28 +65,8 @@ class Game {
         }    
     }
 
-    createAlien(type) {
-        const x = Math.random() * (this.gameArea.offsetWidth - 50);
-        const y = 40;  // Spawn height
-        if (type === 'normal') {
-            this.aliens.push(new Alien(this.gameArea, x, y));
-        } else if (type === 'shooting') {
-            this.aliens.push(new ShootingAlien(this.gameArea, x, y));
-        } else if (type === 'big') {
-            this.aliens.push(new BigAlien(this.gameArea, x, y));
-        } 
-    }
-    
-    spawnBossAlien() {
-        const x = (this.gameArea.offsetWidth - 100) / 2; 
-        const y = 12;
-        this.boss = new BossAlien(this.gameArea, x, y);
-        this.aliens.push(this.boss);
-    }
-
-
     spawnAliensContinuously() {
-        const spawnInterval = 1500; // Interval in milliseconds between each spawn
+        const spawnInterval = 1700;  // เลขน้อยยิ่งเพิ่มเร็วInterval in milliseconds between each spawn
     
         // Spawn a random type of alien at each interval
         const spawn = () => {
@@ -95,6 +85,49 @@ class Game {
         this.spawnAliensContinuously();
     }
 
+
+    createAlien(type) {
+        const x = Math.random() * (this.gameArea.offsetWidth - 50);
+        const y = 40;  // Spawn height
+        if (type === 'normal') {
+            this.aliens.push(new Alien(this.gameArea, x, y));
+        } else if (type === 'shooting') {
+            this.aliens.push(new ShootingAlien(this.gameArea, x, y));
+        } else if (type === 'big') {
+            this.aliens.push(new BigAlien(this.gameArea, x, y));
+        } 
+    }
+    //Gonna add the boss sound effect here
+    spawnBossAlien() {
+        const x = (this.gameArea.offsetWidth - 100) / 2; 
+        const y = 12;
+        this.boss = new BossAlien(this.gameArea, x, y);
+        this.aliens.push(this.boss);
+
+
+        setTimeout(() => {
+            let opacity = 1.0; 
+            const fadeInterval = setInterval(() => {
+                opacity -= 0.1; 
+                if (opacity <= 0) {
+                    clearInterval(fadeInterval); 
+                    if (this.boss) {
+                        const index = this.aliens.indexOf(this.boss);
+                        if (index > -1) {
+                            this.aliens.splice(index, 1); 
+                        }
+                        this.boss.element.parentNode.removeChild(this.boss.element); 
+                        this.boss = null; 
+                        this.endGame();
+                    }
+                } else {
+                    this.boss.element.style.opacity = opacity; // update the opacity
+                }
+            }, 10000); // run every 100 milliseconds
+        }, 35000); // fasde after this time seconds
+    }
+
+
     setupEventListeners() {
     // Move player based on mouse movement
         window.addEventListener('mousemove', event => {
@@ -112,6 +145,11 @@ class Game {
             const bulletX = this.player.x + this.player.width / 2 - 2.5;
             const bulletY = this.player.y - 50;
             this.bullets.push(new Bullet(this.gameArea, bulletX, bulletY, +7,));
+
+            ///I"m gonna add the shoot ound here
+            this.shootSound.play();
+            this.shootSound.currentTime = 0;
+
         });
     }
 
@@ -121,7 +159,11 @@ class Game {
         this.aliens.forEach((alien, index) => {
             alien.move();
             if (this.checkCollision(this.player, alien)) {
-                alien.hit()
+                alien.hit();
+                if (alien instanceof BossAlien) {
+                    this.endGame('Game Over ! Hit by Boss');
+                    return;
+                }    
                 this.lives -= 1;
                 this.updateDisplay();
                 this.aliens.splice(index, 1);
@@ -135,7 +177,7 @@ class Game {
             bullet.move();
             if (bullet.y < 0) {
                 bullet.remove();
-                this.bullets.splice(index, 1);
+                this.bullets.splice(index, 1);``
             }
         });
 
@@ -165,13 +207,16 @@ class Game {
     
                     if (alien instanceof BossAlien) {
                         this.bossHealth -= 1;
+                        this.bossSound.play();
+
+
                         if(this.bossHealth <=0){
                             alien.hit();
                             this.aliens.splice(alienIndex, 1);
                             this.boss = null;// Ensure boss is no longer referenced
                             this.score += 50; 
                             this.updateDisplay();
-                            this.endGame('You win' );
+                            this.endGame('You win !' );
                         } else {
                             this.score += 5; 
                             this.updateDisplay();
@@ -185,18 +230,12 @@ class Game {
                 }
             });
         });
-    
-        if (this.aliens.length === 0 && !this.boss) {
-            this.endGame('You Win!');
-        }
-
     }
-
 
     updateDisplay(){
         document.getElementById('score').textContent = 'Score: ' + this.score;
         document.getElementById('lives').textContent = 'Lives: ' + this.lives;
-        document.getElementById('boss-health').textContent = 'Boss Health: ' + this.bossHealth;
+        document.getElementById('boss-health').textContent = 'Boss: ' + this.bossHealth;
 
     }
 
@@ -223,5 +262,5 @@ class Game {
            document.getElementById('boss-health').textContent = 'Boss Health: ' + this.boss.health;
         }
     }
+    
 }
-

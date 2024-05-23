@@ -1,9 +1,9 @@
 class Player {
-    constructor(gameArea, left, top) {
+    constructor(gameArea, left, top, width, height) {
         this.gameArea = gameArea;
         this.element = document.getElementById('player');
-        this.width = 90; //ขนาดplayer
-        this.height = 90; //ต้องแก้
+        this.width = 0; //ขนาดplayer
+        this.height = 0; //ต้องแก้
         this.x = left;
         this.y = top;
         this.element.style.position = 'absolute';

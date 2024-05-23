@@ -1,6 +1,6 @@
 body {
     padding: 0;
-    margin: 0; /* Added to reset the default margin of the body */
+    margin: 0; 
     text-align: center;
 }
 
@@ -9,7 +9,7 @@ body {
 #game-intro {
     width: 100%;
     height: 100vh; /*change size bg here*/
-    background-image: url(../img/intro-background.png);
+    background-image: url('../img/intro-background.png');
     background-size: cover;
     display: flex;
     flex-direction: column;
@@ -19,34 +19,33 @@ body {
 
 #game-intro img.logo-img {
     max-height: 300px;
-    width: 40vw; /* Keeps the aspect ratio intact */
-    margin: -40px auto 30px; /* Shorthand for margin settings, pushing the image up */
+    width: 40vw; 
+    margin: -40px auto 30px;
 }
 
 button {
     border: none;
-    color: transparent; /* Set the text color */
-    background-size: cover; /* Cover ensures the image covers the entire button */
-    background-position: center; /* Center the background image */
+    color: transparent; 
+    background-size: cover;
+    background-position: center; 
     background-color: transparent;
     cursor: pointer;
     outline: none;
 }
 
 .start-game-button {
-    width: 80vw; /* Responsive width */
-    height: 28vh; /* Responsive height */
+    width: 80vw; 
+    height: 28vh; 
     background-image: url('../img/start-button.png');
-    margin-top: -10vh; /* Space between logo and this button */
+    margin-top: -10vh; 
     margin-left: 4vh;
 }
 
 .sign-game-button {
-    display: none;
-    width: 14vw; /* Responsive width */
-    height: 7vh; /* Responsive height */
-    background-image: url('../img/sign-button.png');
-    margin-top: 3vh; /* Space between start and sign in buttons */
+    width: 35vw; 
+    height: 15vh; 
+    background-image: url('../img/sign-in-button.png');
+    margin-top: 3vh; 
     margin-left: -1vh;
 }
 
@@ -55,34 +54,24 @@ button:hover {
     
 }
 
-#sign-in-form {
-    margin-top: 20px;
-}
-
-#username {
-    padding: 10px;
-    margin-right: 5px;
-}
-
 /*Game screen*/
 
 #gameArea {
     display: none;
     width: 100%;
     height: 100vh; /*change size bg here*/
-    background-image: url(../img/background.png);
+    background-image: url('../img/background.png');
     background-size: cover;
     position: relative;
     animation: slide 9s linear infinite;
-    /*overflow: hidden;*/
 }
 
 @keyframes slide {
     0% {
-        background-position: 0 0; /* Start from the right */
+        background-position: 0 0; 
     }
     100% {
-        background-position: 100% 0; /* End at the left */
+        background-position: 100% 0; 
     }
 }
 
@@ -92,64 +81,86 @@ button:hover {
 }
 
 .alien {
-    width: 20px;
-    height: 22px;
+    width: 60px;
+    height: 35px;
     background: rgb(18, 29, 18);
+    background-image: url('../img/small-alien.png');
+    background-size: cover;
+    margin-top: -10vh
+    
 }
 
 #player {
-    width: 24vh; /* on la fix ici pour la taille  */
-    height: 24vh; /* on la fix ici*/
-    background-image: url('../img/spider-man.png');
+    width: 10vh; /* playersize here */
+    height: 12vh; 
+    background-image: url('../img/ironman.png');
     background-size: cover;
     background-position: center;
-    bottom: 50vh;
-    margin-top: 25vh /*ความห่างจากพื้นด้านล่าง
+    bottom: 30vh;
+    margin-top: 40vh /*ความห่างจากพื้นด้านล่าง
     /*position: absolute; /* Ensure it's positioned absolutely */
-}
-
-.player {
-    width: 100px;
-    height: 100px;
-    background: blue;
-    bottom: 50vh;
-    margin-top: 50vh
-    
 }
 
 .bullet {
     position: absolute;
     width: 7px;
-    height: 30px;
-    background: rgb(32, 32, 25);
+    height: 60px;
+    background: rgb(238, 238, 208);
     bottom: 70vh;/*ความห่างจากพื้นด้านล่าง*/
-    transition: transform 0.1s linear;
+    transition: transform 0.17s linear;
+    margin-top: -30vh;
+    background-image: url('../img/bullet.png');
 }
-
+.alien-bullet {
+    width: 10px;
+    height: 20px;
+    background-color: red;
+    position: absolute;
+}
 .shooting-alien {
-    width: 50px;
-    height: 30px;
+    width: 63px;
+    height: 35px;
     background: red;
+    background-image: url('../img/shooting-alien.png');
+    background-size: cover;
+    background-position: center;
 }
 
 .alien-bullet {
-    background: rgb(72, 43, 168);
+    background: rgb(204, 200, 216);
     transition: transform 0.1s linear;
 }
 
 .big-alien{
-    width: 100px;
-    height: 100px;  
-    background: gold
+    width: 60px;
+    height: 50px;  
+    background-image: url('../img/big-alien.png');
+    background-size: cover;
+    background-position: center;
 }
 
 .boss-alien{
-    width: 100px;
-    height: 100px;  
-    background: rgb(255, 0, 13)
-
+    width: 270px;
+    height: 270px;  
+    background-image: url('../img/boss-alien.gif');
+    background-size: cover;
+    margin-top: -25vh
 }
 
+
+#score, #lives, #boss-health {
+    color: #FFF;  
+    font-family: 'Arial', sans-serif;
+    font-size: 16px;
+    text-align: center;
+}
+
+#boss-health {
+    background-color: #25386e; 
+}
+
+
+/*Game end screen*/
 
 #game-end {
     display: none;
@@ -166,8 +177,38 @@ button:hover {
     background-position: center;
     border-style: double;
     background-image: url('../img/restart-btn.png');
-    margin-top: 50vh; /* Space between logo and this button */
-
+    margin-top: 50vh; 
     width: 14vw;
     height: 7vh;
+}
+
+#game-end {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 20px;
+    /*background: rgba(0, 0, 0, 0.8);*/
+    color: white;
+    text-align: center;
+    border-radius: 10px;
+    z-index: 1000; 
+    font-size: 24px;
+    display: none;
+}
+
+
+#musicToggle {
+    position: fixed;
+    padding: 10px 20px;
+    top: 10px;
+    right: 10px;
+    background-image: url('../img/speaker.png');
+    background-color: #FFF;
+    border: none;
+    width: 20px;
+    height: 40px;
+    border-radius: 5px;
+    cursor: pointer;
+    outline: none;
 }

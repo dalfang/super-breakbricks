@@ -1,3 +1,4 @@
+
 class Alien {
     constructor(gameArea, x ,y) {
         this.gameArea = gameArea;
@@ -56,8 +57,8 @@ class BigAlien extends Alien {
     constructor(gameArea, x, y) {
         super(gameArea, x, y);
         this.element.className = 'big-alien';
-        this.element.style.width = '80px'; // Bigger size
-        this.element.style.height = '80px';
+        //this.element.style.width = '70px'; // Bigger size
+        //this.element.style.height = '70px';
     }  
 }
 
@@ -66,8 +67,8 @@ class BossAlien extends Alien {
         super(gameArea, x, y);
         this.health = 100; // Boss alien has more health
         this.element.className = 'boss-alien'; // Custom style
-        this.element.style.width = '100px'; // Larger size
-        this.element.style.height = '50px';
+        //this.element.style.width = '100px'; // Larger size
+        //this.element.style.height = '250px';
         this.directionX = 3;
     }
 
@@ -104,4 +105,3 @@ class BossAlien extends Alien {
         this.element.style.transform = `translate(${this.x}px, ${this.y}px)`;
     }
 }
-

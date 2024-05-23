@@ -8,11 +8,14 @@ class Bullet {
         this.gameArea.appendChild(this.element);
         this.updatePosition();
         this.speed = speed
+
     }
 
     move() {
-        this.y -= this.speed; // // speed will determine direction: negative for upward, positive for downward
+        this.y -= this.speed; // speed will determine direction: negative for upward, positive for downward
         this.updatePosition();
+
+        
     }
 
     updatePosition() {
@@ -24,11 +27,10 @@ class Bullet {
     }
 
 
-    //when bullet hit alien position //need to be uddate 
     collidesWith(alien) {
-        console.log( "shooting");
-        return this.x < alien.x + 2 && this.x + 2 > alien.x && // ซ้ายหรอ เริ่มจาก0
-               this.y < alien.y + 10 && this.y + 6 > alien.y; // ขวาหรอ เริ่มจาก0
+        return this.x < alien.x + alien.width && 
+               this.x + 8 > alien.x && 
+               this.y < alien.y + alien.height && 
+               this.y + 90 > alien.y; 
     }
-
 }
