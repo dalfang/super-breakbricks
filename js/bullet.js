@@ -6,7 +6,7 @@ class Bullet {
         this.element = document.createElement('div'); //สร่างเอเลียนมาใหม่
         this.element.className = 'bullet'; //อันนี้เอาใปใช้ตกแต่งในcss
         this.gameArea.appendChild(this.element);
-        
+
         this.updatePosition();
         this.speed = speed
 
@@ -30,7 +30,7 @@ class Bullet {
 
     collidesWith(alien) {
         return this.x < alien.x + alien.width && 
-               this.x + 8 > alien.x && 
+               this.x + 18 > alien.x && 
                this.y < alien.y + alien.height && 
                this.y + 90 > alien.y; 
     }

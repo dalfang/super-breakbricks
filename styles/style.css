@@ -103,7 +103,7 @@ button:hover {
 .bullet {
     position: absolute;
     width: 6px;
-    height: 60px;
+    height: 40px;
     background: rgb(229, 229, 122);
     bottom: 60vh;/*ความห่างจากพื้นด้านล่าง*/
     transition: transform 0.17s linear;
@@ -172,6 +172,7 @@ button:hover {
 }
 
 .restart-button {
+    
     background-size: cover;
     background-position: center;
     border-style: double;
