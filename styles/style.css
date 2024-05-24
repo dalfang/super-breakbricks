@@ -43,7 +43,7 @@ button {
 
 .sign-game-button {
     width: 35vw; 
-    height: 15vh; 
+    height: 20vh; 
     background-image: url('../img/sign-in-button.png');
     margin-top: 3vh; 
     margin-left: -1vh;
@@ -93,7 +93,7 @@ button:hover {
 #player {
     width: 10vh; /* playersize here */
     height: 12vh; 
-    background-image: url('../img/ironman.png');
+    /*background-image: url('../img/ironman.png');*/
     background-size: cover;
     background-position: center;
     bottom: 30vh;

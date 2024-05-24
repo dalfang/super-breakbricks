@@ -8,7 +8,7 @@ class Game {
         this.lives = 10;
         this.speed = 1;
         this.bossHealth = 50;
-        this.aliens = []//[new Alien(this.gameArea, this.speed)]; //array to hold alien objects.
+        this.aliens = [];
         this.bullets = [];//array to hold bullet objects.
         this.player = new Player(
             this.gameArea,
@@ -19,13 +19,13 @@ class Game {
         this.gameLoopFrequency = 1000 / 60;
         this.updateDisplay(); //the score and lives display
         this.setupEventListeners();
+       
         this.shootSound = new Audio('../sound/shoot.wav');
         this.shootSound.volume = 0.015;
-
         this.bossSound = new Audio('../sound/bosshuh.mp3')
         this.bossSound.volume = 0.015;
         this.backgroundMusic = document.getElementById('backgroundMusic');
-        this.backgroundMusic.volume = 0.05;
+        this.backgroundMusic.volume = 0.015;
         
         
         this.boss = null;
@@ -50,13 +50,12 @@ class Game {
     populateAliens() {
         const alienCount = 3;
         const shootingAlienCount = 8;
-        const alienWidth = 60; // ความห่างระหว่างเอเลี่ยน
+        const alienWidth = 60; 
         const gameAreaWidth = this.gameArea.offsetWidth;
 
         const startX = (gameAreaWidth - (alienCount + shootingAlienCount) * alienWidth) / 2;
         for (let i = 0; i < alienCount; i++) { 
             const x = startX + i * alienWidth;
-            //const x = gap + i * (alienWidth + gap); //tryna calcul. x 
             this.aliens.push(new Alien(this.gameArea, x, 10));//position to spaw 
         }
         for (let i = 0; i < shootingAlienCount; i++) {
@@ -66,16 +65,15 @@ class Game {
     }
 
     spawnAliensContinuously() {
-        const spawnInterval = 1700;  // เลขน้อยยิ่งเพิ่มเร็วInterval in milliseconds between each spawn
+        const spawnInterval = 1700;  
     
-        // Spawn a random type of alien at each interval
         const spawn = () => {
-            const typeIndex = Math.floor(Math.random() * 3); // Randomly select type index (0, 1, or 2)
+            const typeIndex = Math.floor(Math.random() * 3); 
             const types = ['normal', 'shooting', 'big', 'bigBoss'];
             const type = types[typeIndex];
             this.createAlien(type);
     
-            setTimeout(spawn, spawnInterval); // Recursively call spawn after the interval
+            setTimeout(spawn, spawnInterval); 
         };
     
         setTimeout(spawn, spawnInterval);
