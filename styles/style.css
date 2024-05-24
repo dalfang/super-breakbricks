@@ -168,7 +168,7 @@ button:hover {
     background-image: url('../img/end-game-bg.png');
     background-size: cover;
     position: relative;
-    ;
+    animation: slide 8s linear infinite;
 }
 
 .restart-button {
