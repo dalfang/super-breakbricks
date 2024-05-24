@@ -42,7 +42,7 @@ button {
 }
 
 .sign-game-button {
-    width: 35vw; 
+    width: 50vh; 
     height: 20vh; 
     background-image: url('../img/sign-in-button.png');
     margin-top: 3vh; 
@@ -57,13 +57,12 @@ button:hover {
 /*Game screen*/
 
 #gameArea {
-    display: none;
     width: 100%;
     height: 100vh; /*change size bg here*/
     background-image: url('../img/background.png');
     background-size: cover;
     position: relative;
-    animation: slide 9s linear infinite;
+    animation: slide 8s linear infinite;
 }
 
 @keyframes slide {
@@ -103,12 +102,12 @@ button:hover {
 
 .bullet {
     position: absolute;
-    width: 7px;
+    width: 6px;
     height: 60px;
-    background: rgb(238, 238, 208);
-    bottom: 70vh;/*ความห่างจากพื้นด้านล่าง*/
+    background: rgb(229, 229, 122);
+    bottom: 60vh;/*ความห่างจากพื้นด้านล่าง*/
     transition: transform 0.17s linear;
-    margin-top: -30vh;
+    margin-top: -40vh;
     background-image: url('../img/bullet.png');
 }
 .alien-bullet {
