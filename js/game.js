@@ -14,7 +14,7 @@ class Game {
             this.gameArea,
             250,
             290); // player size x, y here
-        this.player.setImage('../img/ironman.png'); // i set the player image
+        this.player.setImage('./img/ironman.png'); // i set the player image
         this.gameInterval = null;
         this.gameLoopFrequency = 1000 / 60;
         this.updateDisplay(); //the score and lives display
