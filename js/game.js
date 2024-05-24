@@ -23,9 +23,9 @@ class Game {
         this.updateDisplay(); //the score and lives display
         this.setupEventListeners();
        
-        this.shootSound = new Audio('../sound/shoot.wav');
+        this.shootSound = new Audio('./sound/shoot.wav');
         this.shootSound.volume = 0.015;
-        this.bossSound = new Audio('../sound/bosshuh.mp3')
+        this.bossSound = new Audio('./sound/bosshuh.mp3')
         this.bossSound.volume = 0.015;
         this.backgroundMusic = document.getElementById('backgroundMusic');
         this.backgroundMusic.volume = 0.015;
