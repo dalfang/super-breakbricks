@@ -195,7 +195,7 @@ class Game {
                 this.lives -= 1;
                 this.updateDisplay();
                 if (this.lives === 0) {
-                    this.endGame('Game Over');
+                    this.endGame('Game Over! You lose! ');
                 }
             }
         });
@@ -217,7 +217,7 @@ class Game {
                             this.boss = null;// Ensure boss is no longer referenced
                             this.score += 50; 
                             this.updateDisplay();
-                            this.endGame('You win !' );
+                            this.endGame('You win!' );
                         } else {
                             this.score += 5; 
                             this.updateDisplay();

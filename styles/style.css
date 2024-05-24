@@ -105,7 +105,7 @@ button:hover {
     width: 6px;
     height: 40px;
     background: rgb(229, 229, 122);
-    bottom: 60vh;/*ความห่างจากพื้นด้านล่าง*/
+    bottom: 65vh;/*ความห่างจากพื้นด้านล่าง*/
     transition: transform 0.17s linear;
     margin-top: -40vh;
     background-image: url('../img/bullet.png');
